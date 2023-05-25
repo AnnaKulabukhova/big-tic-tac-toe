@@ -1,0 +1,29 @@
+.inner {
+  margin-bottom: 30px;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 15px;
+  text-align: start;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 1;
+  color: #444244;
+}
+
+.buttonSave {
+  display: block;
+  width: 150px;
+  margin-left: 20px;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #585658;
+  text-decoration: none;
+  background-color: #d7d7d7;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
