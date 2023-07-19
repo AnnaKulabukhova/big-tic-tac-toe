@@ -3,3 +3,5 @@ export const numberOfSymbols = ['3', '4', '5'];
 
 export const MAP = 'map';
 export const QTY_SYMBOLS = 'qtySymbols';
+
+// hmhjzf
