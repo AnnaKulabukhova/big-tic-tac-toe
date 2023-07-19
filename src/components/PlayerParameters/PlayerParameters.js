@@ -1,15 +1,31 @@
 import { useContext } from 'react';
 import { Player } from '../Player';
-import styles from './PlayerParameters.module.css';
-import { FIRST_PLAYER, SECOND_PLAYER } from '../../constants/players';
 import { PlayersContext } from '../Context/PlayersContext';
+import { PlayersDispatchContext } from '../Context/PlayersContext';
+import { playersList } from '../../constants/players';
+import styles from './PlayerParameters.module.css';
 
 export const PlayerParameters = () => {
-  // const { players } = useContext(PlayersContext);
+  const dispatch = useContext(PlayersDispatchContext);
+  const players = useContext(PlayersContext);
+
+  const handleChangeName = (player) => (name) => {
+    dispatch({
+      type: player,
+      payload: name,
+    });
+  };
+
   return (
     <div className={styles.wrapper}>
-      <Player number="1" name={[FIRST_PLAYER].name} />
-      <Player number="2" name={[SECOND_PLAYER].name} />
+      {playersList.map((player, index) => (
+        <Player
+          key={index}
+          number={index + 1}
+          name={players[player].name}
+          changePlayerName={handleChangeName(player)}
+        />
+      ))}
     </div>
   );
 };

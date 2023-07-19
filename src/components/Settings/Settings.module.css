@@ -1,4 +1,5 @@
 .inner {
+  display: block;
   margin-bottom: 30px;
 }
 
@@ -26,4 +27,13 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.warning {
+  display: block;
+  margin-left: 20px;
+  max-width: 450px;
+  font-size: 25px;
+  font-weight: 500;
+  color: #94103c;
 }

@@ -1,2 +1,3 @@
-export const FIRST_PLAYER = '1';
-export const SECOND_PLAYER = '2';
+export const FIRST_PLAYER = 'first player';
+export const SECOND_PLAYER = 'second player';
+export const playersList = [FIRST_PLAYER, SECOND_PLAYER];

@@ -1,51 +1,47 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import styles from './Player.module.css';
 import img from '../../images/rename.svg';
-import { PlayersContext } from '../Context/PlayersContext';
 
-export const Player = ({ number, name }) => {
+export const Player = ({ number, name, changePlayerName }) => {
   const [isActive, setIsActive] = useState(false);
-  const [user, setUser] = useState('');
-  const [isSave, setIsSave] = useState(true);
-  const { changePlayerName, players } = useContext(PlayersContext);
+  const [user, setUser] = useState(name);
+  const [isEdit, setIsEdit] = useState(true);
 
-  let inputClass;
+  const handleChangeName = (e) => {
+    setUser(e.target.value);
+  };
 
-  if (isSave) {
-    inputClass = styles.activeInput;
-  } else {
-    inputClass = styles.inactiveInput;
-  }
-
-  const handleChangeInput = (e) => {
+  const handleForm = (e) => {
     e.preventDefault();
   };
 
   const handleRedactName = () => {
-    setIsActive(!isActive);
+    setIsActive((value) => !value);
+    setIsEdit(true);
   };
 
   const handleSaveName = () => {
-    const newContext = { ...players };
-    players[name] = user;
-    changePlayerName(players[name]);
-    setIsSave(!isSave);
+    setIsEdit((value) => !value);
+    setIsActive((value) => !value);
+    changePlayerName(user);
   };
 
   return (
     <div className={styles.wrapper}>
-      <form onSubmit={handleChangeInput}>
+      <form onSubmit={handleForm}>
         <h1 className={styles.name}>Имя игрока {number}</h1>
         <div className={styles.inner}>
           {isActive ? (
             <div className={styles.wrapperInput}>
               <input
-                className={inputClass}
+                className={`${
+                  isEdit ? styles.activeInput : styles.inactiveInput
+                }`}
                 type="text"
                 value={user}
-                onChange={(e) => setUser(e.target.value)}
+                onChange={handleChangeName}
               />
-              {isSave && (
+              {isEdit && (
                 <button
                   className={styles.buttonSave}
                   type="submit"
@@ -57,7 +53,9 @@ export const Player = ({ number, name }) => {
             </div>
           ) : (
             <div className={styles.wrapperFakeInput}>
-              <div className={styles.fakeInput}>Введите Ваше имя</div>
+              <div className={styles.fakeInput}>
+                {user || 'Введите Ваше имя'}
+              </div>
               <button
                 title="Изменить имя"
                 className={styles.buttonRename}

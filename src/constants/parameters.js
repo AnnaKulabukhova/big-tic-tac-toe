@@ -1,17 +1,19 @@
+import { MAIN_MENU, PLAYER_PARAMETERS, SETTINGS } from './paths';
+
 export const parameters = [
   {
     title: 'Параметры игроков',
-    path: 'playerParameters',
+    path: PLAYER_PARAMETERS,
     id: 1,
   },
   {
     title: 'Настройка игры',
-    path: 'settings',
+    path: SETTINGS,
     id: 2,
   },
   {
     title: 'Назад',
-    path: '/',
+    path: MAIN_MENU,
     id: 3,
   },
 ];
