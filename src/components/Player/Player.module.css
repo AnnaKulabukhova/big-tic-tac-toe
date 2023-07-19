@@ -1,0 +1,84 @@
+.wrapper {
+  max-width: 70%;
+  margin-bottom: 30px;
+}
+
+.name {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 15px;
+  text-align: start;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 1;
+  color: #444244;
+}
+
+.inner {
+  display: flex;
+}
+
+.wrapperInput {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.activeInput {
+  flex-grow: 1;
+  min-width: 200px;
+  padding: 10px;
+  margin-right: 25px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f3f3f3;
+}
+
+.inactiveInput {
+  width: calc(100% - 115px);
+  min-width: 200px;
+  padding: 10px;
+  margin-right: 25px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #e9e1e1;
+}
+
+.buttonSave {
+  width: 90px;
+  padding: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #585658;
+  text-decoration: none;
+  background-color: #d7d7d7;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.wrapperFakeInput {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.fakeInput {
+  flex-grow: 1;
+  min-width: 200px;
+  padding: 10px;
+  margin-right: 25px;
+  font-size: 20px;
+  background-color: #e9e1e1;
+  border-radius: 5px;
+  border: none;
+}
+
+.buttonRename {
+  width: 90px;
+  background-color: #78a2b7;
+  border: none;
+  cursor: pointer;
+}

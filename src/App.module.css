@@ -1,0 +1,8 @@
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  padding: 50px;
+  text-align: center;
+}
