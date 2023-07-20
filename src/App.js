@@ -1,23 +1,24 @@
-import { BrowserRouter } from 'react-router-dom';
-import { Routes } from './components/Routes';
-import { PlayersContextProvider } from './components/Context/PlayersContext';
-import { SettingsContextProvider } from './components/Context/SettingsContext';
-import { LeaderboardContextProvider } from './components/Context/LeaderboardContext';
-import styles from './App.module.css';
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <PlayersContextProvider>
-        <SettingsContextProvider>
-          <LeaderboardContextProvider>
-            <div className={styles.app}>
-              <Routes />
-            </div>
-          </LeaderboardContextProvider>
-        </SettingsContextProvider>
-      </PlayersContextProvider>
-    </BrowserRouter>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
 
