@@ -1,67 +1,47 @@
-import { useContext } from 'react';
+import { useState } from 'react';
+import { buildGrid } from '../../helpers/buildGrid';
+import { calculateWinner } from '../../helpers/calculateWinner';
 import { Square } from '../Square/Square';
-import { PlayersContext } from '../Context/PlayersContext';
 import {
   FIRST_PLAYER_SYMBOL,
   SECOND_PLAYER_SYMBOL,
 } from '../../constants/game';
-import { playersQueue } from '../../constants/playersQueue';
-import { calculateWinner } from '../../helpers/calculateWinner';
 import styles from './GameGrid.module.css';
 
-export const GameGrid = ({
-  qtySymbols,
-  endGame,
-  activePlayer,
-  setActivePlayer,
-  setWinner,
-  grid,
-  setGrid,
-  isFirstPlayer,
-  setIsFirstPlayer,
-}) => {
-  const players = useContext(PlayersContext);
+export const GameGrid = ({ sizeX, sizeY, endGame, newGame }) => {
+  const [grid, setGrid] = useState(() => buildGrid(sizeX, sizeY));
+  const [isFirstPlayer, setIsFirstPlayer] = useState(true);
+
+  if (newGame) {
+    const newGrid = buildGrid(sizeX, sizeY);
+    setGrid(newGrid);
+    console.log(newGrid);
+  }
 
   const handleClick = (rowIndex, cellIndex) => {
-    if (grid[rowIndex][cellIndex]) {
+    const newGrid = [...grid];
+    const row = [...grid[rowIndex]];
+    if (row[cellIndex]) {
       return;
     }
-
-    const updatedGrid = [...grid];
-    const row = [...grid[rowIndex]];
-
-    const newSymbol = isFirstPlayer
-      ? FIRST_PLAYER_SYMBOL
-      : SECOND_PLAYER_SYMBOL;
-
-    row[cellIndex] = newSymbol;
-    updatedGrid[rowIndex] = row;
-
-    setGrid(updatedGrid);
-
-    const winner = calculateWinner(
-      updatedGrid,
-      rowIndex,
-      cellIndex,
-      newSymbol,
-      qtySymbols
-    );
+    row[cellIndex] = isFirstPlayer ? FIRST_PLAYER_SYMBOL : SECOND_PLAYER_SYMBOL;
+    newGrid[rowIndex] = row;
+    setGrid(newGrid);
+    const newSymbol = newGrid[rowIndex][cellIndex];
+    const winner = calculateWinner(newGrid, rowIndex, cellIndex, newSymbol);
 
     if (winner) {
-      setWinner(players[activePlayer].name);
       endGame();
       return;
     }
     setIsFirstPlayer((value) => !value);
-
-    setActivePlayer((value) => playersQueue[value].next);
   };
 
   return (
     <div className={styles.wrapper}>
       {grid.map((row, rowIndex) => (
         <div className={styles.row} key={`${rowIndex}`}>
-          {row.map((_, cellIndex) => (
+          {row.map((cell, cellIndex) => (
             <Square
               key={`${rowIndex} ${cellIndex}`}
               value={grid[rowIndex][cellIndex]}

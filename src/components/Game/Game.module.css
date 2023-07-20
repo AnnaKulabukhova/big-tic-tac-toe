@@ -1,4 +1,4 @@
-.containerButton {
+.f {
   display: flex;
   align-items: baseline;
 }
@@ -14,23 +14,12 @@
   margin: 80px auto;
 }
 
-.playerName {
+.namePlayer {
   display: block;
   margin-left: 130px;
   margin-bottom: 20px;
-  padding: 7px;
   font-size: 25px;
   line-height: 1;
   font-weight: 500;
-  color: #5f5e5e;
-}
-
-.activePlayer {
-  font-weight: 700;
-  color: #353335;
-}
-
-.winner {
-  font-weight: 800;
-  color: #378a4b;
+  color: #575657;
 }

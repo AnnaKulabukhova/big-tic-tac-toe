@@ -9,11 +9,13 @@ export const Parameters = () => {
       <h1 className={styles.title}>Параметры</h1>
       <div className={styles.wrapper}>
         <div className={styles.listOfParameters}>
-          {parameters.map(({ title, path }) => (
-            <div key={path} className={styles.link}>
-              <Link path={path}>{title}</Link>
-            </div>
-          ))}
+          {parameters.map(({ title, path }) => {
+            return (
+              <div key={path} className={styles.link}>
+                <Link path={path}>{title}</Link>
+              </div>
+            );
+          })}
         </div>
         <Outlet />
       </div>

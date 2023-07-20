@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import buttonOpen from '../../images/buttonOpen.svg';
 import styles from './Select.module.css';
+import buttonOpen from '../../images/buttonOpen.svg';
 
-export const Select = ({ activeElement, list, saveSelect }) => {
+export const Select = ({ activeElement, list, changeSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSizeSelect = (option) => {
+    changeSelect(option);
     setIsOpen(!isOpen);
-    saveSelect(option);
   };
 
   return (

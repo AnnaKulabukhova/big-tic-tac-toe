@@ -1,18 +1,10 @@
 import { lines } from '../constants/lines';
-import { convertQtySymbols } from '../helpers/convertQtySymbols';
 
-export const calculateWinner = (
-  grid,
-  rowIndex,
-  cellIndex,
-  symbol,
-  qtySymbols
-) => {
+export const calculateWinner = (grid, rowIndex, cellIndex, symbol) => {
   const initialCount = 1;
   let count = initialCount;
   let currentY = rowIndex;
   let currentX = cellIndex;
-  const qtySymbolsOfNumbers = convertQtySymbols(qtySymbols);
 
   lines.map((line) => {
     line.map((trajectory) => {
@@ -34,14 +26,14 @@ export const calculateWinner = (
       return count;
     });
 
-    if (count < qtySymbolsOfNumbers) {
+    if (count < 5) {
       count = initialCount;
     }
 
     return count;
   });
 
-  if (count === qtySymbolsOfNumbers) {
+  if (count === 5) {
     return true;
   } else {
     return false;
