@@ -3,6 +3,7 @@ import { Link } from '../Link';
 import { LeaderboardContext } from '../Context/LeaderboardContext';
 import { MAIN_MENU } from '../../constants/paths';
 import { sortLeaderboard } from '../../helpers/sortedLeaderboard';
+import { titleColumn } from '../../constants/titleColumn';
 import styles from './Leaderboard.module.css';
 
 export const Leaderboard = () => {
@@ -12,56 +13,28 @@ export const Leaderboard = () => {
     <div className={styles.wrapper}>
       <h1 className={styles.title}>Таблица лидеров</h1>
       <div className={styles.table}>
-        <div className={styles.column}>
-          <h2 className={styles.titleColumn}>Имя игрока</h2>
-          <ul className={styles.list}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              {titleColumn.map((title, index) => (
+                <th key={index} className={styles.titleColumn}>
+                  {title}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
             {sortedLeaderboard.map((player) => (
-              <li className={styles.item} key={player.name}>
-                {player.name}
-              </li>
+              <tr key={player.name}>
+                <td className={styles.cell}>{player.name}</td>
+                <td className={styles.cell}>{player.numberOfGame}</td>
+                <td className={styles.cell}>{player.numberOfWins}</td>
+                <td className={styles.cell}>{player.numberOfDefeats}</td>
+                <td className={styles.cell}>{player.percentageOfWins}%</td>
+              </tr>
             ))}
-          </ul>
-        </div>
-        <div className={styles.column}>
-          <h2 className={styles.titleColumn}>Количество игр</h2>
-          <ul className={styles.list}>
-            {sortedLeaderboard.map((player) => (
-              <li className={styles.item} key={player.name}>
-                {player.numberOfGame}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={styles.column}>
-          <h2 className={styles.titleColumn}>Количество побед</h2>
-          <ul className={styles.list}>
-            {sortedLeaderboard.map((player) => (
-              <li className={styles.item} key={player.name}>
-                {player.numberOfWins}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={styles.column}>
-          <h2 className={styles.titleColumn}>Количество поражений</h2>
-          <ul className={styles.list}>
-            {sortedLeaderboard.map((player) => (
-              <li className={styles.item} key={player.name}>
-                {player.numberOfDefeats}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={styles.column}>
-          <h2 className={styles.titleColumn}>Процент побед</h2>
-          <ul className={styles.list}>
-            {sortedLeaderboard.map((player) => (
-              <li className={styles.item} key={player.name}>
-                {player.percentageOfWins}%
-              </li>
-            ))}
-          </ul>
-        </div>
+          </tbody>
+        </table>
       </div>
       <div className={styles.button}>
         <Link path={MAIN_MENU}>Назад</Link>

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { GameGrid } from '../GameGrid';
 import { Link } from '../Link';
 import { Button } from '../Button';
@@ -10,7 +10,6 @@ import { MAIN_MENU } from '../../constants/paths';
 import { MAP, QTY_SYMBOLS } from '../../constants/settings';
 import { convertMapSize } from '../../helpers/convertMapSize';
 import { changeLeaderboard } from '../../helpers/changeLeaderboard';
-import { startNewGame } from '../../helpers/startNewGame';
 import { buildGrid } from '../../helpers/buildGrid';
 import styles from './Game.module.css';
 
@@ -20,22 +19,20 @@ export const Game = () => {
   const [activePlayer, setActivePlayer] = useState(FIRST_PLAYER);
   const [winner, setWinner] = useState(null);
   const [isFirstPlayer, setIsFirstPlayer] = useState(true);
-  const numberOfColAndRow = convertMapSize(settings[MAP].option);
-  const [grid, setGrid] = useState(() =>
-    buildGrid(numberOfColAndRow, numberOfColAndRow)
+  const sizeOfMap = convertMapSize(settings[MAP].option);
+  const initialGrid = useMemo(
+    () => buildGrid(sizeOfMap.sizeX, sizeOfMap.sizeY),
+    [sizeOfMap]
   );
+  const [grid, setGrid] = useState(initialGrid);
   const players = useContext(PlayersContext);
   const { leaders } = useContext(LeaderboardContext);
-  const { redactLeaders } = useContext(LeaderboardContext);
+  const { editLeaders } = useContext(LeaderboardContext);
 
-  const handleUpdateMap = () => {
-    startNewGame(
-      setGrid,
-      setIsFirstPlayer,
-      setActivePlayer,
-      numberOfColAndRow,
-      numberOfColAndRow
-    );
+  const startNewGame = () => {
+    setGrid(initialGrid);
+    setIsFirstPlayer(true);
+    setActivePlayer(FIRST_PLAYER);
     setWinner(null);
     setIsNewGame((value) => !value);
   };
@@ -51,7 +48,7 @@ export const Game = () => {
       {}
     );
 
-    redactLeaders(changeLeaderboard(lastGamePlayers, leaders));
+    editLeaders(changeLeaderboard(lastGamePlayers, leaders));
   };
 
   return (
@@ -62,14 +59,14 @@ export const Game = () => {
         </div>
         {isNewGame && (
           <div className={styles.button}>
-            <Button onClick={handleUpdateMap}>Начать заново</Button>
+            <Button onClick={startNewGame}>Начать заново</Button>
           </div>
         )}
       </div>
       <div className={styles.containerInner}>
         <GameGrid
-          sizeX={numberOfColAndRow}
-          sizeY={numberOfColAndRow}
+          sizeX={sizeOfMap.sizeX}
+          sizeY={sizeOfMap.sizeY}
           endGame={endGame}
           activePlayer={activePlayer}
           setActivePlayer={setActivePlayer}

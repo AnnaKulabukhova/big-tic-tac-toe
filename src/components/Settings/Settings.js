@@ -27,7 +27,7 @@ export const Settings = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (sizeOfMap > qtySymbol) {
+    if (sizeOfMap.sizeX > qtySymbol && sizeOfMap.sizeY > qtySymbol) {
       redactSettings({
         ...settings,
         [MAP]: {

@@ -11,10 +11,6 @@ export const Player = ({ number, name, changePlayerName }) => {
     setUser(e.target.value);
   };
 
-  const handleForm = (e) => {
-    e.preventDefault();
-  };
-
   const handleRedactName = () => {
     setIsActive((value) => !value);
     setIsEdit(true);
@@ -28,45 +24,41 @@ export const Player = ({ number, name, changePlayerName }) => {
 
   return (
     <div className={styles.wrapper}>
-      <form onSubmit={handleForm}>
-        <h1 className={styles.name}>Имя игрока {number}</h1>
-        <div className={styles.inner}>
-          {isActive ? (
-            <div className={styles.wrapperInput}>
-              <input
-                className={`${
-                  isEdit ? styles.activeInput : styles.inactiveInput
-                }`}
-                type="text"
-                value={user}
-                onChange={handleChangeName}
-              />
-              {isEdit && (
-                <button
-                  className={styles.buttonSave}
-                  type="submit"
-                  onClick={handleSaveName}
-                >
-                  Сохранить
-                </button>
-              )}
-            </div>
-          ) : (
-            <div className={styles.wrapperFakeInput}>
-              <div className={styles.fakeInput}>
-                {user || 'Введите Ваше имя'}
-              </div>
+      <h1 className={styles.name}>Имя игрока {number}</h1>
+      <div className={styles.inner}>
+        {isActive ? (
+          <div className={styles.wrapperInput}>
+            <input
+              className={`${
+                isEdit ? styles.activeInput : styles.inactiveInput
+              }`}
+              type="text"
+              value={user}
+              onChange={handleChangeName}
+            />
+            {isEdit && (
               <button
-                title="Изменить имя"
-                className={styles.buttonRename}
-                onClick={handleRedactName}
+                className={styles.buttonSave}
+                type="submit"
+                onClick={handleSaveName}
               >
-                <img src={img} alt="Изменить имя" />
+                Сохранить
               </button>
-            </div>
-          )}
-        </div>
-      </form>
+            )}
+          </div>
+        ) : (
+          <div className={styles.wrapperFakeInput}>
+            <div className={styles.fakeInput}>{user || 'Введите Ваше имя'}</div>
+            <button
+              title="Изменить имя"
+              className={styles.buttonRename}
+              onClick={handleRedactName}
+            >
+              <img src={img} alt="Изменить имя" />
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

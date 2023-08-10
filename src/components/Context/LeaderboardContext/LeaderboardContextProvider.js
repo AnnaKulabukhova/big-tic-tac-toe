@@ -5,7 +5,7 @@ import { useState } from 'react';
 export const LeaderboardContextProvider = ({ children }) => {
   const [leaders, setLeaders] = useState(leaderboard);
   return (
-    <LeaderboardContext.Provider value={{ leaders, redactLeaders: setLeaders }}>
+    <LeaderboardContext.Provider value={{ leaders, editLeaders: setLeaders }}>
       {children}
     </LeaderboardContext.Provider>
   );
